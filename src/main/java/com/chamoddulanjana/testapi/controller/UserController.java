@@ -15,27 +15,29 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<UserDto> getUsers() {
-        return userService.getUsers();
+    public List<UserDto> getUsers(@RequestHeader("Authorization") String token) {
+        return userService.getUsers(token);
     }
 
     @GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable String id) {
-        return userService.getUserById(id);
+    public UserDto getUserById(@PathVariable String id, @RequestHeader("Authorization") String token) {
+        return userService.getUserById(id, token);
     }
 
     @PostMapping
-    public void saveUser(@RequestBody UserDto userDto) {
-        userService.saveUser(userDto);
+    public void saveUser(@RequestBody UserDto userDto, @RequestHeader("Authorization") String token) {
+        userService.saveUser(userDto, token);
     }
 
     @PutMapping
-    public void updateUser(@RequestBody UserDto userDto, @RequestParam String id) {
-        userService.updateUser(userDto, id);
+    public UserDto updateUser(@RequestBody UserDto userDto,
+                              @RequestParam String id,
+                              @RequestHeader("Authorization") String token) {
+        return userService.updateUser(userDto, id, token);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable String id) {
-        userService.deleteUser(id);
+    public void deleteUser(@PathVariable String id, @RequestHeader("Authorization") String token) {
+        userService.deleteUser(id, token);
     }
 }
