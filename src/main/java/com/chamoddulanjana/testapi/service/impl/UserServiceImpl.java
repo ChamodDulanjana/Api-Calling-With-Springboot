@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
             }
             return response.body().string();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
         } finally {
             if (response != null) {
                 response.body().close();
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
             }
             return gson.fromJson(response.body().string(), UserDto.class);
         } catch (IOException e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
         } finally {
             if (response != null) {
                 response.body().close();
@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService {
             }
             return gson.fromJson(response.body().string(), UserDto.class);
         } catch (IOException e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
         } finally {
             if (response != null) {
                 response.body().close();
@@ -180,7 +180,7 @@ public class UserServiceImpl implements UserService {
             }
             return gson.fromJson(response.body().string(), UserDto.class);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
         } finally {
             if (response != null) {
                 response.body().close();
@@ -226,7 +226,7 @@ public class UserServiceImpl implements UserService {
             }
             return response.isSuccessful();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
         } finally {
             if (response != null) {
                 response.body().close();
